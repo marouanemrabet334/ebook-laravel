@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Requests\Auth\AuthRequest;
+namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+
+
 
 class FrontendController extends Controller
 {
