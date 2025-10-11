@@ -9,30 +9,27 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
 
     <!-- Plugins css -->
 
-    <link href="{{ asset('public/admin/assets/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/admin/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
-    <link href="{{ asset('public/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/admin/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
 
 
-    <!-- include libraries(jQuery, bootstrap) -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
+   
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
 
     <!-- Jquery Toast css -->
-    <link href="{{ asset('public/admin/assets/libs/jquery-toast/jquery.toast.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/libs/jquery-toast/jquery.toast.min.css') }}" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -153,24 +150,24 @@
     <div class="rightbar-overlay"></div>
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/admin/assets/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/vendor.min.js') }}"></script>
 
     <!-- Chart JS -->
-    <script src="{{ asset('public/admin/assets/libs/chart-js/Chart.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/chart-js/Chart.bundle.min.js') }}"></script>
 
     <!-- Init js -->
-    <script src="{{ asset('public/admin/assets/js/pages/dashboard.init.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/pages/dashboard.init.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('public/admin/assets/js/app.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/app.min.js') }}"></script>
 
 
-    <script src="{{ asset('public/admin/assets/libs/jquery-mockjax/jquery.mockjax.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/jquery-mockjax/jquery.mockjax.min.js') }}"></script>
 
-    <script src="{{ asset('public/admin/assets/libs/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/bootstrap-filestyle2/bootstrap-filestyle.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/bootstrap-filestyle2/bootstrap-filestyle.min.js') }}"></script>
 
     <!-- Init js-->
     <script src="{{ asset('admin/assets/js/pages/form-advanced.init.js') }}"></script>
@@ -178,37 +175,37 @@
 
     {{-- {{ asset('admin/') }} --}}
     <!-- Required datatable js -->
-    <script src="{{ asset('public/admin/assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Responsive examples -->
-    <script src="{{ asset('public/admin/assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/datatables/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/responsive.bootstrap4.min.js') }}"></script>
 
     <!-- Buttons examples -->
-    <script src="{{ asset('public/public/admin/assets/libs/datatables/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/datatables/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/datatables/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/datatables/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/datatables/buttons.print.min.js') }}"></script>
 
     <!-- Datatables init -->
-    <script src="{{ asset('public/admin/assets/js/pages/datatables.init.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/pages/datatables.init.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('public/admin/assets/js/app.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/app.min.js') }}"></script>
 
-    <script src="{{ asset('public/admin/assets/libs/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/libs/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/select2/select2.min.js') }}"></script>
 
 
     <!-- Tost-->
     <script src="{{ asset('public/admin/assets/libs/jquery-toast/jquery.toast.min.js') }}"></script>
 
     <!-- toastr init js-->
-    <script src="{{ asset('public/admin/assets/js/pages/toastr.init.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/pages/toastr.init.js') }}"></script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -284,6 +281,10 @@
         @endif
     </script>
 
+ <!-- include libraries(jQuery, bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    </script>
 
 </body>
 
