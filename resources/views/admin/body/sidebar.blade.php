@@ -24,8 +24,8 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('all.category')}}">All Category</a></li>
-                        <li><a href="{{route('all.subcategory')}}">All SubCategory</a></li>
+                        <li><a href="{{route('admin.all.category')}}">All Category</a></li>
+                        <li><a href="{{route('admin.all.subcategory')}}">All SubCategory</a></li>
 
                     </ul>
                 </li>
@@ -36,7 +36,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('all.author')}}">All Author</a></li>
+                        <li><a href="{{route('admin.all.author')}}">All Author</a></li>
 
 
                     </ul>
@@ -49,8 +49,8 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('all.ebook')}}">All Ebook</a></li>
-                        <li><a href="{{route('add.ebook')}}">Add Ebook</a></li>
+                        <li><a href="{{route('admin.all.ebook')}}">All Ebook</a></li>
+                        <li><a href="{{route('admin.add.ebook')}}">Add Ebook</a></li>
 
 
                     </ul>
@@ -62,7 +62,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('edit.ads')}}">Mange Ads</a></li>
+                        <li><a href="{{route('admin.edit.ads')}}">Mange Ads</a></li>
 
                     </ul>
                 </li>
