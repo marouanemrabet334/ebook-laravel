@@ -34,10 +34,10 @@
 
                         @foreach ($books as $item)
                             <tr>
-                                {{-- <td> <img src="{{ asset($item->ebook_img) }}"
-                                    style="width: 60px; height: 50px;"> </td> --}}
-                                <td> <img src="{{ $item->getFirstMediaUrl('images') }}" style="width: 60px; height: 50px;">
-                                </td>
+                                <td> <img src="{{ asset('uploads'.$item->ebook_img) }}"
+                                    style="width: 60px; height: 50px;"> </td> 
+                              {{--   <td> <img src="{{ $item->getFirstMediaUrl('images') }}" style="width: 60px; height: 50px;">
+                                </td> --}}
                                 <td>{{ $item->ebook_name }}</td>
 
                                 <td>
@@ -61,21 +61,21 @@
 
                                 <td width="30%">
 
-                                    <a href="{{ route('ebook.edit', $item->id) }}"
+                                    <a href="{{ route('admin.ebook.edit', $item->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-warning"> <i
                                             class="fas fa-pencil-alt"></i> </a>
-                                    <a href="{{ route('ebook.delete', $item->id) }}"
+                                    <a href="{{ route('admin.ebook.delete', $item->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-danger"><i
                                             class="fas fa-times"></i></a>
 
 
 
                                     @if ($item->status == 1)
-                                        <a href="{{ route('ebook.inactive', $item->id) }}"
+                                        <a href="{{ route('admin.ebook.inactive', $item->id) }}"
                                             class="btn btn-icon waves-effect waves-light btn-success"><i
                                                 class="far fa-thumbs-up"></i></a>
                                     @else
-                                        <a href="{{ route('ebook.active', $item->id) }}"
+                                        <a href="{{ route('admin.ebook.active', $item->id) }}"
                                             class="btn btn-icon waves-effect waves-light btn-danger"><i
                                                 class="far fa-thumbs-down"></i></a>
                                     @endif

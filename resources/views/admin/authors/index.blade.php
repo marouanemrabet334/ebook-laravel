@@ -32,7 +32,7 @@
                         @foreach ($authors as $item)
                             <tr>
 
-                                <td> <img src="{{ asset($item->author_image) }}" style="width: 60px;height:60px;"
+                                <td> <img src="{{ asset('uploads'.$item->author_image) }}" style="width: 60px;height:60px;"
                                         alt="" srcset="" class="rounded-circle"></td>
                                 <td>{{ $item->author_name }}</td>
                                 {{--
@@ -40,10 +40,10 @@
 
                                 <td width="35%">
 
-                                    <a href="{{ route('author.edit', $item->id) }}"
+                                    <a href="{{ route('admin.author.edit', $item->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-warning"> <i
                                             class="fas fa-pencil-alt"></i> </a>
-                                    <a href="{{ route('author.delete', $item->id) }}"
+                                    <a href="{{ route('admin.author.delete', $item->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-danger"><i
                                             class="fas fa-times"></i></a>
                                 </td>
@@ -65,12 +65,12 @@
                 <h4 class="header-title">Add Author</h4>
 
 
-                <form action="{{ route('author.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.author.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <br>
                     <div class="form-group">
                         <label>Author Name Ar<span class="text-danger"> *</span></label>
-                        <input type="text" name="author_name"required="" placeholder="Enter name ar"
+                        <input type="text" name="author_name" required="" placeholder="Enter name ar"
                             class="form-control">
                         @error('author_name')
                             <span class="text-danger">

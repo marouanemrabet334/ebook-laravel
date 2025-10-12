@@ -18,7 +18,7 @@
             <div class="card-box">
                 <h4 class="header-title">Edit SubCategory</h4>
 
-                <form method="post" action="{{ route('subcategory.update') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.subcategory.update') }}" enctype="multipart/form-data">
                     @csrf
 
                     <input type="hidden" name="id" value="{{ $subcategory->id }}">

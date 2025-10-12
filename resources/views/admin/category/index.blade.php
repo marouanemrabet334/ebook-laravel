@@ -97,7 +97,7 @@
                 <h4 class="header-title">Add Category</h4>
 
 
-                <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.category.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <br>
                     <div class="form-group">

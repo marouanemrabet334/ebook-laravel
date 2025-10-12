@@ -18,7 +18,7 @@
             <div class="card-box">
                 <h4 class="header-title">Edit Autho</h4>
 
-                <form action="{{ route('author.update', $author->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.author.update', $author->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" value="{{ $author->id }}">
                     <input type="hidden" name="old_image" value="{{ $author->author_image }}">

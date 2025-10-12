@@ -65,7 +65,7 @@
             <div class="card-box">
                 <h4 class="header-title">Add SubCategory</h4>
 
-                <form method="post" action="{{ route('subcategory.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.subcategory.store') }}" enctype="multipart/form-data">
                     @csrf
                     <br>
 

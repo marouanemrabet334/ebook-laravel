@@ -18,7 +18,7 @@
             <div class="card-box">
                 <h4 class="header-title">Edit Category</h4>
 
-                <form action="{{ route('category.update', $category->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.category.update', $category->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" value="{{ $category->id }}">
                     <input type="hidden" name="old_image" value="{{ $category->category_image }}">
