@@ -22,7 +22,7 @@ class EbookController extends Controller
     use FileUploadTrait;
 
 
-    public function AllEbook()
+    public function index()
     {
 
 
@@ -33,7 +33,7 @@ class EbookController extends Controller
         return view('admin.ebook.index', compact('books'));
     }
 
-    public function CreateEbook()
+    public function create()
     {
         $categories = Category::latest()->get();
         $subcategories = SubCategory::latest()->get();
@@ -42,7 +42,7 @@ class EbookController extends Controller
         return view('admin.ebook.create', compact('categories', 'authors', 'subcategories'));
     }
 
-    public function StoreEbook(Request $request)
+    public function store(Request $request)
     {
 
         $imgName = $this->uploadFile($request, 'ebook_img', null, '/ebooks');
@@ -97,7 +97,7 @@ class EbookController extends Controller
         return redirect()->route('ebook.index')->with($notification);
     } // end method
 
-    public function EditEbook($id)
+    public function edit($id)
     {
 
         $ebookFiles = EbookFile::where('ebook_id', $id)->get();
@@ -111,7 +111,7 @@ class EbookController extends Controller
         return view('admin.ebook.edit', compact('categories', 'subcategory', 'books', 'ebookFiles', 'authors'));
     }
 
-    public function EbookDataUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
 
         $ebook =  Ebook::findOrFail($id);
@@ -172,7 +172,7 @@ class EbookController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function EbookActive($id)
+    public function active($id)
     {
 
         Ebook::findOrFail($id)->update(['status' => 1]);
@@ -185,7 +185,7 @@ class EbookController extends Controller
     }
 
 
-    public function EbookInactive($id)
+    public function inactive($id)
     {
         Ebook::findOrFail($id)->update(['status' => 0]);
         $notification = array(
@@ -196,7 +196,7 @@ class EbookController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function EbookDelete($id)
+    public function destroy($id)
     {
         $book = Ebook::findOrFail($id);
 

@@ -19,7 +19,7 @@
             <div class="card-box">
                 <h4 class="header-title">Add Add</h4>
 
-                <form method="post" action="{{ route('ebook.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.ebook.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <br>
@@ -67,8 +67,6 @@
                     </div>
                     {{-- end row 1 --}}
 
-
-
                     {{-- start row 2 --}}
                     <div class="row">
 
@@ -102,7 +100,6 @@
 
                     {{-- end row 2 --}}
 
-
                     {{-- start row 3 --}}
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -114,7 +111,6 @@
                                 </span>
                             @enderror
                         </div>
-
 
                         <div class="form-group col-md-4">
                             <label for="inputState" class="col-form-label">Upload Pdf</label>
@@ -184,15 +180,10 @@
 
                         </div> <!-- end col md 4 -->
                     </div>
-
-
-
-
                     {{-- start row 4 --}}
                     <div class="row">
 
-
-                        <div class="col-md-6">
+                       <div class="col-md-6">
 
                             <div class="form-group">
                                 <h5>Short Description <span class="text-danger">*</span></h5>
@@ -281,9 +272,6 @@
             </div> <!-- end card-box -->
         </div>
     </div> <!-- end row -->
-
-
-   
 @endsection
 
 @push('scripts')
@@ -309,7 +297,7 @@
                 } else {
                     alert('danger');
                 }
-            });    
+            });
         });
     </script>
 @endpush
