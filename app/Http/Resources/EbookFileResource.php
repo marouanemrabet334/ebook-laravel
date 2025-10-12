@@ -17,7 +17,7 @@ class EbookFileResource extends JsonResource
         return [
             'id' => $this->id,
             'ebook_id' => $this->ebook_id,
-            'file_path' => encrypt(asset($this->file_path)),
+            'file_path' => asset($this->file_path),
             'file_name' => $this->file_name,
             'file_size' => $this->file_size,
             'file_type' => $this->file_type,
