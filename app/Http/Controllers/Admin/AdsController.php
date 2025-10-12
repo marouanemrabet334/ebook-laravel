@@ -35,14 +35,14 @@ class AdsController extends Controller
             'ios_app_id' => $request->ios_app_id,
             'admob_reward' => $request->admob_reward,
             'banner' => $request->banner,
-            'interstisial' => $request->interstisial,
+            'interstitial' => $request->interstitial,
             'unity_live_mode' => $request->unity_live_mode,
             'unity_game_id' => $request->unity_game_id,
             'unity_banner' => $request->unity_banner,
-            'unity_interstisial' => $request->unity_interstisial,
+            'unity_interstitial' => $request->unity_interstitial,
             'unity_reward' => $request->unity_reward,
+            'status' => $request->status,
             'updated_at' => Carbon::now(),
-
         ]);
 
         $notification = array(

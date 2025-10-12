@@ -18,7 +18,7 @@
             <div class="card-box">
                 <h4 class="header-title">Edit Ads</h4>
 
-                <form action="{{ route('ads.update', $ads->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.ads.update', $ads->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" value="{{ $ads->id }}">
                     <br>
@@ -88,7 +88,7 @@
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label>Andoid App Id<span class="text-danger">*</span></label>
+                                <label>Android App Id<span class="text-danger">*</span></label>
                                 <input type="text" name="android_app_id" class="form-control"
                                     value="{{ $ads->android_app_id }}">
 
@@ -147,10 +147,10 @@
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label>Admob Intertitial<span class="text-danger">*</span></label>
-                                <input type="text" name="interstisial" class="form-control"
-                                    value="{{ $ads->interstisial }}">
-                                @error('interstisial')
+                                <label>Admob Interstitial<span class="text-danger">*</span></label>
+                                <input type="text" name="interstitial" class="form-control"
+                                    value="{{ $ads->interstitial }}">
+                                @error('interstitial')
                                     <span class="text-danger">
 
                                         <strong>{{ $message }}</strong>
@@ -193,7 +193,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Unityt Banner<span class="text-danger">*</span></label>
+                                <label>Unity Banner<span class="text-danger">*</span></label>
                                 <input type="text" name="unity_banner" class="form-control"
                                     value="{{ $ads->unity_banner }}">
                                 @error('unity_banner')
@@ -208,10 +208,10 @@
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label>Unity Intertitial<span class="text-danger">*</span></label>
-                                <input type="text" name="unity_interstisial" class="form-control"
-                                    value="{{ $ads->unity_interstisial }}">
-                                @error('unity_interstisial')
+                                <label>Unity Interstitial<span class="text-danger">*</span></label>
+                                <input type="text" name="unity_interstitial" class="form-control"
+                                    value="{{ $ads->unity_interstitial }}">
+                                @error('unity_interstitial')
                                     <span class="text-danger">
 
                                         <strong>{{ $message }}</strong>
@@ -223,7 +223,7 @@
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label>Unity Intertitial<span class="text-danger">*</span></label>
+                                <label>Unity Reward<span class="text-danger">*</span></label>
                                 <input type="text" name="unity_reward" class="form-control"
                                     value="{{ $ads->unity_reward }}">
                                 @error('unity_reward')
