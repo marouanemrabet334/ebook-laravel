@@ -24,7 +24,7 @@ class SubCategoryController extends Controller
     public function index()
     {
 
-        $categories = Category::orderBy('category_name', 'ASC')->get();
+        $categories = Category::latest()->get();
         $subcategory = SubCategory::latest()->get();
         return view('admin.category.subCategory.index', compact('subcategory', 'categories'));
     }
@@ -42,7 +42,7 @@ class SubCategoryController extends Controller
             'subcategory_name.required' => 'Input SubCategory Name',
         ]);
 
-        $imageName =   $this->uploadFile($request, 'subcategory_image',  null, '/subcategories');
+        $imageName = $this->uploadFile($request, 'subcategory_image',  null, '/subcategories');
 
         $subCategory = new SubCategory();
         $subCategory->category_id = $request->category_id;

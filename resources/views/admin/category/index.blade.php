@@ -41,8 +41,8 @@
 
                                 <td>{{ $category->category_name }}</td>
 
-                                <td> <img src="{{ asset('uploads'.$category->category_image) }}" style="width: 70px;height:40px;"
-                                        alt="" srcset=""></td>
+                                <td> <img src="{{ asset('uploads' . $category->category_image) }}"
+                                        style="width: 70px;height:40px;" alt="" srcset=""></td>
 
                                 <td><i class="{{ $category->category_icon }}"></i></td>
 
@@ -102,8 +102,7 @@
                     <br>
                     <div class="form-group">
                         <label>Category Name<span class="text-danger"> *</span></label>
-                        <input type="text" name="category_name"required="" placeholder="Enter name"
-                            class="form-control">
+                        <input type="text" name="category_name"required="" placeholder="Enter name" class="form-control">
                         @error('category_name')
                             <span class="text-danger">
                                 <strong>{{ $message }}</strong>
