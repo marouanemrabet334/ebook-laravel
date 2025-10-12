@@ -14,6 +14,7 @@ use App\Models\FileUp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Traits\FileUploadTrait;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class EbookController extends Controller
@@ -48,25 +49,26 @@ class EbookController extends Controller
         $imgName = $this->uploadFile($request, 'ebook_img', null, '/ebooks');
 
         $ebook = new Ebook();
-        $ebook->category_id      = $request->category_id;
-        $ebook->subcategory_id   = $request->subcategory_id;
-        $ebook->ebook_name       = $request->ebook_name;
-        $ebook->ebook_img        = $imgName;
-        $ebook->ebook_img_url    = $request->ebook_img_url;
-        $ebook->author_id        = $request->author_id;
-        $ebook->pages            = $request->pages;
-        $ebook->lang_ebook       = $request->lang_ebook;
-        $ebook->short_desc       = $request->short_desc;
-        $ebook->long_desc        = $request->long_desc;
-        $ebook->pdf_from_url     = $request->pdf_from_url;
-        $ebook->hot_deals        = $request->hot_deals;
-        $ebook->featured_slider  = $request->featured_slider;
-        $ebook->special_offer    = $request->special_offer;
-        $ebook->soon             = $request->soon;
-        $ebook->status           = 1;
-        $ebook->free             = $request->free;
-        $ebook->rating           = 0;
-        $ebook->created_at       = Carbon::now();
+        $ebook->category_id = $request->category_id;
+        $ebook->subcategory_id = $request->subcategory_id;
+        $ebook->author_id = $request->author_id;
+        $ebook->user_id = Auth::user()->id;           
+        $ebook->ebook_name = $request->ebook_name;
+        $ebook->ebook_img = $imgName;
+        $ebook->ebook_img_url = $request->ebook_img_url;     
+        $ebook->pages = $request->pages;
+        $ebook->lang_ebook   = $request->lang_ebook;
+        $ebook->short_desc = $request->short_desc;
+        $ebook->long_desc = $request->long_desc;
+        $ebook->pdf_from_url = $request->pdf_from_url;
+        $ebook->hot_deals = $request->hot_deals;
+        $ebook->featured_slider = $request->featured_slider;
+        $ebook->special_offer = $request->special_offer;
+        $ebook->soon = $request->soon;
+        $ebook->status = 1;
+        $ebook->free = $request->free;
+        $ebook->rating = 0;
+        $ebook->created_at = Carbon::now();
         $ebook->save();
 
         foreach ($request->file('pdf_from_local') as $file) {

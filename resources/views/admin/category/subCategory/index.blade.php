@@ -89,8 +89,8 @@
 
 
                     <div class="form-group">
-                        <label>SubCategory Name Ar<span class="text-danger"> *</span></label>
-                        <input type="text" name="subcategory_name"required="" placeholder="Enter name ar"
+                        <label>SubCategory Name<span class="text-danger"> *</span></label>
+                        <input type="text" name="subcategory_name" required="" placeholder="Enter name"
                             class="form-control">
                         @error('subcategory_name')
                             <span class="text-danger">

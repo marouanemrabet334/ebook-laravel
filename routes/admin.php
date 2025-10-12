@@ -26,54 +26,53 @@ Route::group([
     'as' => 'admin.'
 ], function () {
 
-    /*     Route::get('/admin/dashboard', function () {
-        return view('admin.index');
-    })->name('dashboard'); */
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index'); //admin.dashboard.index
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index'); //admin.dashboard.index
 
-    Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout'); // Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
-    
-    
-        Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-        Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
-        Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-        Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-        Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
-        Route::get('/category/active/{id}', [CategoryController::class, 'active'])->name('category.active');
-        Route::get('/category/inactive/{id}', [CategoryController::class, 'inactive'])->name('category.inactive');
+    Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-        // Admin Sub Category All Routes
+    // Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
 
-        Route::get('/category/sub', [SubCategoryController::class, 'index'])->name('subcategory.index');
-        Route::post('/category/sub/store', [SubCategoryController::class, 'store'])->name('subcategory.store');
-        Route::get('/category/sub/edit/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
-        Route::post('/category/update', [SubCategoryController::class, 'update'])->name('subcategory.update');
-        Route::get('/category/sub/delete/{id}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
-        Route::get('/category/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
-  
-        Route::get('/ebook/all', [EbookController::class, 'index'])->name('ebook.index');
-        Route::get('/ebook/create', [EbookController::class, 'create'])->name('ebook.create');
-        Route::post('/ebook/store', [EbookController::class, 'store'])->name('ebook.store');
-        Route::get('/ebook/edit/{id}', [EbookController::class, 'edit'])->name('ebook.edit');
-        Route::post('/ebook/update', [EbookController::class, 'update'])->name('ebook.update');
-       // Route::post('/ebook/thambnail/update', [EbookController::class, 'ThambnailImageUpdate'])->name('update.ebook.thambnail');
-       
-        Route::post('/ebook/file/update', [EbookFilesController::class, 'store'])->name('update.ebook.file');
-        Route::get('/ebook/file/delete/{id}', [EbookFilesController::class, 'deleteFile'])->name('ebook.delete.file');
-        Route::get('/ebook/inactive/{id}', [EbookController::class, 'inactive'])->name('ebook.inactive');
-        Route::get('/ebook/active/{id}', [EbookController::class, 'active'])->name('ebook.active');
-        Route::get('/ebook/delete/{id}', [EbookController::class, 'destroy'])->name('ebook.delete');
-    
 
-        Route::get('/author/all', [AuthorController::class, 'AllAuthor'])->name('author.index');
-        Route::post('/author/store', [AuthorController::class, 'AuthorStore'])->name('author.store');
-        Route::get('/author/edit/{id}', [AuthorController::class, 'AuthorEdit'])->name('author.edit');
-        Route::post('/author/update/{id}', [AuthorController::class, 'AuthorUpdate'])->name('author.update');
-        Route::get('/author/delete/{id}', [AuthorController::class, 'AuthorDelete'])->name('author.delete');
-    
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+    Route::get('/category/active/{id}', [CategoryController::class, 'active'])->name('category.active');
+    Route::get('/category/inactive/{id}', [CategoryController::class, 'inactive'])->name('category.inactive');
 
-        Route::get('/ads/edit', [AdsController::class, 'AdsEdit'])->name('edit.ads');
-        Route::post('/update/{id}', [AdsController::class, 'AdsUpdate'])->name('ads.update');
-        //Route::get('/delete/{id}', [AuthorController::class, 'AuthorDelete'])->name('author.delete');
-    
+    // Admin Sub Category All Routes
+
+    Route::get('/category/sub', [SubCategoryController::class, 'index'])->name('subcategory.index');
+    Route::post('/category/sub/store', [SubCategoryController::class, 'store'])->name('subcategory.store');
+    Route::get('/category/sub/edit/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
+    Route::post('/category/update', [SubCategoryController::class, 'update'])->name('subcategory.update');
+    Route::get('/category/sub/delete/{id}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
+    Route::get('/category/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
+
+    Route::get('/ebook/all', [EbookController::class, 'index'])->name('ebook.index');
+    Route::get('/ebook/create', [EbookController::class, 'create'])->name('ebook.create');
+    Route::post('/ebook/store', [EbookController::class, 'store'])->name('ebook.store');
+    Route::get('/ebook/edit/{id}', [EbookController::class, 'edit'])->name('ebook.edit');
+    Route::post('/ebook/update', [EbookController::class, 'update'])->name('ebook.update');
+    // Route::post('/ebook/thambnail/update', [EbookController::class, 'ThambnailImageUpdate'])->name('update.ebook.thambnail');
+
+    Route::post('/ebook/file/update', [EbookFilesController::class, 'store'])->name('update.ebook.file');
+    Route::get('/ebook/file/delete/{id}', [EbookFilesController::class, 'deleteFile'])->name('ebook.delete.file');
+    Route::get('/ebook/inactive/{id}', [EbookController::class, 'inactive'])->name('ebook.inactive');
+    Route::get('/ebook/active/{id}', [EbookController::class, 'active'])->name('ebook.active');
+    Route::get('/ebook/delete/{id}', [EbookController::class, 'destroy'])->name('ebook.delete');
+
+
+    Route::get('/author/all', [AuthorController::class, 'AllAuthor'])->name('author.index');
+    Route::post('/author/store', [AuthorController::class, 'AuthorStore'])->name('author.store');
+    Route::get('/author/edit/{id}', [AuthorController::class, 'AuthorEdit'])->name('author.edit');
+    Route::post('/author/update/{id}', [AuthorController::class, 'AuthorUpdate'])->name('author.update');
+    Route::get('/author/delete/{id}', [AuthorController::class, 'AuthorDelete'])->name('author.delete');
+
+
+    Route::get('/ads/edit', [AdsController::class, 'AdsEdit'])->name('edit.ads');
+    Route::post('/update/{id}', [AdsController::class, 'AdsUpdate'])->name('ads.update');
+    //Route::get('/delete/{id}', [AuthorController::class, 'AuthorDelete'])->name('author.delete');
+
 });

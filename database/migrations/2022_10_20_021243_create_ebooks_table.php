@@ -12,13 +12,12 @@ return new class extends Migration
         Schema::create('ebooks', function (Blueprint $table) {
             $table->id(); 
             $table->unsignedBigInteger('category_id')->index();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id')->index();
             $table->unsignedBigInteger('subcategory_id')->index();
+            $table->unsignedBigInteger('author_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
             $table->json('ebook_name');        // store translations as JSON
             $table->string('ebook_img')->nullable();
             $table->string('ebook_img_url')->nullable();
-            $table->unsignedBigInteger('author_id')->index();
             $table->unsignedSmallInteger('pages')->nullable();
             $table->string('lang_ebook', 10)->default('en');
             $table->json('short_desc');     // store translations as JSON
@@ -33,7 +32,6 @@ return new class extends Migration
             $table->decimal('rating', 2, 1)->nullable()->checkBetween([0, 5]);
             $table->unsignedInteger('view_count')->default(0);
             $table->unsignedInteger('download_count')->default(0);
-            $table->string('isbn', 20)->nullable()->unique(); // stores the unique ISBN identifier for the ebook (up to 20 characters), can be null, and must be unique across all records
             $table->date('published_at')->nullable();
             $table->string('publisher')->nullable();
             $table->decimal('price', 8, 2)->nullable();

@@ -40,6 +40,7 @@ class CategoryController extends Controller
         $category->category_name = $request->category_name;
         $category->category_image = $imageName ?? $request->category_image;
         $category->category_icon = $request->category_icon;
+        $category->status = 1;
         $category->save();
 
         $notification = array(
