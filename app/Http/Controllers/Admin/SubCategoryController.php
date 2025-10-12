@@ -25,7 +25,7 @@ class SubCategoryController extends Controller
     {
 
         $categories = Category::latest()->get();
-        $subcategory = SubCategory::latest()->get();
+       $subcategory = SubCategory::with('category')->latest()->get();
         return view('admin.category.subCategory.index', compact('subcategory', 'categories'));
     }
 
