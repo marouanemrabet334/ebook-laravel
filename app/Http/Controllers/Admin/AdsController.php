@@ -12,15 +12,15 @@ class AdsController extends Controller
 {
     //
 
-    public function AdsEdit()
+    public function edit()
     {
 
-        $ads = AdsSetting::find(1);
+        $ads = AdsSetting::first();
         return view('admin.ads.edit', compact('ads'));
     }
 
 
-    public function AdsUpdate(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
 
 

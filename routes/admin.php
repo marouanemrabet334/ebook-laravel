@@ -71,8 +71,8 @@ Route::group([
     Route::get('/author/delete/{id}', [AuthorController::class, 'AuthorDelete'])->name('author.delete');
 
 
-    Route::get('/ads/edit', [AdsController::class, 'AdsEdit'])->name('edit.ads');
-    Route::post('/update/{id}', [AdsController::class, 'AdsUpdate'])->name('ads.update');
+    Route::get('/ads/edit', [AdsController::class, 'edit'])->name('edit.ads');
+    Route::post('/update/{id}', [AdsController::class, 'update'])->name('ads.update');
     //Route::get('/delete/{id}', [AuthorController::class, 'AuthorDelete'])->name('author.delete');
 
 });
