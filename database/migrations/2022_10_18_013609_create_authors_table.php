@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->string('author_name_ar');
+            $table->string('author_name');
             $table->text('about_author');
             $table->string('author_image')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

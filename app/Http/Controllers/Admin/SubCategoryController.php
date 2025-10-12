@@ -7,25 +7,26 @@ use App\Models\Admin\Category;
 use App\Models\Admin\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Intervention\Image\Facades\Image;
+use App\Traits\FileUploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class SubCategoryController extends Controller
 {
     //
-
+    use FileUploadTrait;
     public function GetSubCategory($category_id)
     {
 
-        $subcat = SubCategory::where('category_id', $category_id)->orderBy('subcategory_name_en', 'ASC')->get();
-        return json_encode($subcat);
+        $subCat = SubCategory::where('category_id', $category_id)->orderBy('subcategory_name_en', 'ASC')->get();
+        return json_encode($subCat);
     }
 
     public function SubCategoryView()
     {
 
-        $categories = Category::orderBy('category_name_ar', 'ASC')->get();
+        $categories = Category::orderBy('category_name', 'ASC')->get();
         $subcategory = SubCategory::latest()->get();
-        return view('admin.category.subcategory_view', compact('subcategory', 'categories'));
+        return view('admin.category.subCategory.index', compact('subcategory', 'categories'));
     }
 
 
@@ -34,30 +35,20 @@ class SubCategoryController extends Controller
 
         $request->validate([
             'category_id' => 'required',
-            'subcategory_name_ar' => 'required',
+            'subcategory_name' => 'required',
             'subcategory_image' => 'required',
         ], [
             'category_id.required' => 'Please select Any option',
-            'subcategory_name_ar.required' => 'Input SubCategory Arabic Name',
-
-
+            'subcategory_name.required' => 'Input SubCategory Name',
         ]);
 
+        $imageName =   $this->uploadFile($request, 'subcategory_image',  null, '/subcategories');
 
-
-        $image = $request->file('subcategory_image');
-        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-
-        Image::make($image)->resize(981, 654)->save('upload/subcategory/' . $name_gen);
-        $save_url = 'upload/subcategory/' . $name_gen;
-
-        SubCategory::insert([
-            'category_id' => $request->category_id,
-            'subcategory_name_ar' => $request->subcategory_name_ar,
-            'subcategory_image' =>$save_url,
-            'created_at' => Carbon::now(),
-
-        ]);
+        $subCategory = new SubCategory();
+        $subCategory->category_id = $request->category_id;
+        $subCategory->subcategory_name = $request->subcategory_name;
+        $subCategory->subcategory_image = $imageName;
+        $subCategory->save();
 
         $notification = array(
             'message' => 'SubCategory Inserted Successfully',
@@ -71,31 +62,22 @@ class SubCategoryController extends Controller
 
     public function SubCategoryEdit($id)
     {
-        $categories = Category::orderBy('category_name_ar', 'ASC')->get();
+        $categories = Category::orderBy('category_name', 'ASC')->get();
         $subcategory = SubCategory::findOrFail($id);
-        return view('admin.category.subcategory_edit', compact('subcategory', 'categories'));
+        return view('admin.category.subCategory.edit', compact('subcategory', 'categories'));
     }
 
-    public function SubCategoryUpdate(Request $request)
+    public function SubCategoryUpdate(Request $request, $id)
     {
 
-        $subcat_id = $request->id;
+        $subCategory = SubCategory::findOrFail($id);
 
-        $old_img = $request->old_image;
-        if ($request->file('subcategory_image')) {
+        $imageName = $this->uploadFile($request, 'subcategory_image', $subCategory->subcategory_image, '/subcategories');
 
-        unlink($old_img);
-        $image = $request->file('subcategory_image');
-        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();  // 3434343443.jpg
-
-        Image::make($image)->resize(981, 654)->save('upload/subcategory/' . $name_gen);
-        $save_url = 'upload/subcategory/' . $name_gen;
-
-
-        SubCategory::findOrFail($subcat_id)->update([
+        $subCategory->update([
             'category_id' => $request->category_id,
-            'subcategory_name_ar' => $request->subcategory_name_ar,
-            'subcategory_image' => $save_url,
+            'subcategory_name' => $request->subcategory_name,
+            'subcategory_image' => $imageName,
             'updated_at' => Carbon::now(),
 
         ]);
@@ -105,22 +87,7 @@ class SubCategoryController extends Controller
             'alert-type' => 'info'
         );
 
-        return redirect()->route('all.subcategory')->with($notification);
-    } else {
-
-        SubCategory::findOrFail($subcat_id)->update([
-            'category_id' => $request->category_id,
-            'subcategory_name_ar' => $request->subcategory_name_ar,
-            'updated_at' => Carbon::now(),
-        ]);
-
-        $notification = array(
-            'message' => 'SubCategory Updated without Image Successfully',
-            'alert-type' => 'info'
-        );
-
-        return redirect()->route('all.subcategory')->with($notification);
-    } // end Else
+        return redirect()->route('admin.subcategory.index')->with($notification);
     }  // end method
 
 
@@ -128,11 +95,11 @@ class SubCategoryController extends Controller
     public function SubCategoryDelete($id)
     {
 
-        $subcategory = Category::findOrFail($id);
-        $img = $subcategory->subcategory_image;
-        unlink($img);
+        $subcategory = SubCategory::findOrFail($id);
+        Storage::disk('public_uploads')->delete($subcategory->subcategory_image);
 
-        SubCategory::findOrFail($id)->delete();
+        $subcategory->delete();
+
         $notification = array(
             'message' => 'SubCategory Deleted Successfully',
             'alert-type' => 'info'
@@ -140,5 +107,4 @@ class SubCategoryController extends Controller
 
         return redirect()->back()->with($notification);
     }
-
 }

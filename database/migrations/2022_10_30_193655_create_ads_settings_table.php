@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('unity_banner');
             $table->string('unity_interstisial');
             $table->string('unity_reward');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

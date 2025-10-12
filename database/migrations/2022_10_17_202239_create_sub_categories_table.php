@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
             $table->integer('category_id');
-            $table->string('subcategory_name_ar');
+            $table->string('subcategory_name');
             $table->string('subcategory_image');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

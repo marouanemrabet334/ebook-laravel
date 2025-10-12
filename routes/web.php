@@ -20,8 +20,6 @@ Route::middleware('guest')->group(function () {
 });
 
 
-Route::get('/add', [EbookController::class, 'index'])->name('add.fille');
-Route::post('/store', [EbookController::class, 'filesUpload'])->name('store.file');
 
 // User All Routes
 /*Route::get('/', [UserController::class, 'Index']);

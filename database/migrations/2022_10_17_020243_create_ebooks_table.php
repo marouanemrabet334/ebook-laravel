@@ -10,26 +10,35 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ebooks', function (Blueprint $table) {
-            $table->id();
-            $table->integer('category_id');
-            $table->integer('subcategory_id');
-            $table->string('ebook_name_ar');
-            $table->string('ebook_img');
-            $table->unsignedBigInteger('media_count')->default(0);
-            $table->string('ebook_img_url');
-            $table->integer('author_id');
-            $table->integer('pages');
-            $table->string('lang_ebook');
-            $table->string('short_descp_ar');
-            $table->text('long_descp_ar');
-            $table->string('pdf_from_url');
-            $table->integer('hot_deals')->default(0);
-            $table->integer('featured_slider')->default(0);
-            $table->integer('special_offer')->default(0);
-            $table->integer('soon')->default(0);
-            $table->integer('status')->default(0);
-            $table->integer('free')->default(0);
-            $table->string('rating')->nullable();
+            $table->id(); 
+            $table->unsignedBigInteger('category_id')->index();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('category_id')->index();
+            $table->unsignedBigInteger('subcategory_id')->index();
+            $table->json('ebook_name');        // store translations as JSON
+            $table->string('ebook_img')->nullable();
+            $table->string('ebook_img_url')->nullable();
+            $table->unsignedBigInteger('author_id')->index();
+            $table->unsignedSmallInteger('pages')->nullable();
+            $table->string('lang_ebook', 10)->default('en');
+            $table->json('short_desc');     // store translations as JSON
+            $table->json('long_desc');      // store translations as JSON
+            $table->string('pdf_from_url')->nullable();
+            $table->boolean('hot_deals')->default(false);
+            $table->boolean('featured_slider')->default(false);
+            $table->boolean('special_offer')->default(false);
+            $table->boolean('soon')->default(false);
+            $table->boolean('status')->default(true);
+            $table->boolean('free')->default(true);
+            $table->decimal('rating', 2, 1)->nullable()->checkBetween([0, 5]);
+            $table->unsignedInteger('view_count')->default(0);
+            $table->unsignedInteger('download_count')->default(0);
+            $table->string('isbn', 20)->nullable()->unique(); // stores the unique ISBN identifier for the ebook (up to 20 characters), can be null, and must be unique across all records
+            $table->date('published_at')->nullable();
+            $table->string('publisher')->nullable();
+            $table->decimal('price', 8, 2)->nullable();
+            $table->string('currency', 3)->default('USD');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

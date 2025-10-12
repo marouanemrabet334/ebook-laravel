@@ -16,17 +16,18 @@ class AdsController extends Controller
     {
 
         $ads = AdsSetting::find(1);
-        return view('admin.ads.ads_edit', compact('ads'));
+        return view('admin.ads.edit', compact('ads'));
     }
 
 
-    public function AdsUpdate(Request $request)
+    public function AdsUpdate(Request $request, string $id)
     {
 
-        $ads_id = $request->id;
+
+        $adsSetting = AdsSetting::findOrFail($id);
 
 
-        AdsSetting::findOrFail($ads_id)->update([
+        $adsSetting->update([
             'type_ads' => $request->type_ads,
             'start_app_live_mode' => $request->start_app_live_mode,
             'start_app_account_id' => $request->start_app_account_id,
@@ -50,10 +51,6 @@ class AdsController extends Controller
         );
 
         return redirect()->route('edit.ads')->with($notification);
-     // end Else
+        // end Else
     }
 }// end method
-
-
-
-

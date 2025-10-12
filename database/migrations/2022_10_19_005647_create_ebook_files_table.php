@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('ebook_files', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name');
-            $table->string('category_image')->nullable();
-            $table->string('category_icon')->nullable();
+            $table->integer('ebook_id')->constrained('ebooks')->onDelete('cascade');
+            $table->string('file_path');
+            $table->string('file_name');
+            $table->integer('file_size');
+            $table->string('file_type');
+            $table->string('file_extension');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('multi_files');
     }
 };

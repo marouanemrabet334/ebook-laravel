@@ -280,6 +280,9 @@
             }
         @endif
     </script>
+    <!-- Custom Scripts Stack -->
+    @stack('scripts')
+
 
  <!-- include libraries(jQuery, bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"

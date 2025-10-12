@@ -6,18 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Intervention\Image\Facades\Image;
-
-
+use App\Traits\FileUploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
     //
-
+    use FileUploadTrait;
     public function CategoryView()
     {
         $categories = Category::latest()->get();
-        return view('admin.category.category_view', compact('categories'));
+        return view('admin.category.index', compact('categories'));
     }
 
     public function CategoryStore(Request $request)
@@ -25,30 +24,24 @@ class CategoryController extends Controller
 
         $validateData = $request->validate([
 
-            'category_name_ar' => 'required',
+            'category_name' => 'required',
             'category_image' => 'required',
             'category_icon' => 'required',
         ], [
 
-            'category_name_ar.required' => 'Input Category Arabic  Name',
+            'category_name.required' => 'Input Category Arabic  Name',
             'category_icon.required' => 'Input Category Icon',
 
         ]);
 
-        $image = $request->file('category_image');
-        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        $imageName =   $this->uploadFile($request, 'category_image',  null, '/categories');
 
-        Image::make($image)->resize(1020, 519)->save('upload/category/' . $name_gen);
-        $save_url = 'upload/category/' . $name_gen;
+        $category = new Category();
+        $category->category_name = $request->category_name;
+        $category->category_image = $imageName ?? $request->category_image;
+        $category->category_icon = $request->category_icon;
+        $category->save();
 
-        Category::insert([
-
-            'category_name_ar' => $request->category_name_ar,
-            'category_image' => $save_url,
-            'category_icon' => $request->category_icon,
-            'created_at' => Carbon::now(),
-
-        ]);
         $notification = array(
             'message' => 'Category Inserted Successfully',
             'alert-type' => 'success'
@@ -60,54 +53,27 @@ class CategoryController extends Controller
     public function CategoryEdit($id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.category.category_edit', compact('category'));
+        return view('admin.category.edit', compact('category'));
     }
-    public function CategoryUpdate(Request $request)
+    public function CategoryUpdate(Request $request, $id)
     {
+        $category = Category::findOrFail($id);
 
-        $cat_id = $request->id;
+        $imageName = $this->uploadFile($request, 'category_image', $category->category_image, '/categories');
 
-        $old_img = $request->old_image;
+        $category->update([
+            'category_name' => $request->category_name,
+            'category_image' =>  $imageName,
+            'category_icon' => $request->category_icon,
+            'updated_at' => Carbon::now(),
+        ]);
 
-        if ($request->file('category_image')) {
+        $notification = array(
+            'message' => 'Category Updated with Image Successfully',
+            'alert-type' => 'info'
+        );
 
-
-            unlink($old_img);
-            $image = $request->file('category_image');
-            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();  // 3434343443.jpg
-
-            Image::make($image)->resize(1020, 519)->save('upload/category/' . $name_gen);
-            $save_url = 'upload/category/' . $name_gen;
-
-            Category::findOrFail($cat_id)->update([
-                'category_name_ar' => $request->category_name_ar,
-                'category_image' => $save_url,
-                'category_icon' => $request->category_icon,
-                'updated_at' => Carbon::now(),
-            ]);
-            $notification = array(
-                'message' => 'Category Updated with Image Successfully',
-                'alert-type' => 'info'
-            );
-
-            return redirect()->route('all.category')->with($notification);
-        } else {
-
-            Category::findOrFail($cat_id)->update([
-
-                'category_name_ar' => $request->category_name_ar,
-                'category_icon' => $request->category_icon,
-                'updated_at' => Carbon::now(),
-            ]);
-
-            $notification = array(
-                'message' => 'Category Updated without Image Successfully',
-                'alert-type' => 'info'
-            );
-
-            return redirect()->route('all.category')->with($notification);
-        } // end Else
-
+        return redirect()->route('admin.category.index')->with($notification);
     } // End Method
 
 
@@ -116,38 +82,38 @@ class CategoryController extends Controller
     {
 
         $category = Category::findOrFail($id);
-        $img = $category->category_image;
-        unlink($img);
+        Storage::disk('public_uploads')->delete($category->category_image);
 
-        Category::findOrFail($id)->delete();
+        $category->delete();
 
         $notification = array(
-            'message' => 'Category Deleted Successfully',
+            'message' => 'Category ID: {$id}  has been Deleted Successfully',
             'alert-type' => 'success'
         );
 
         return redirect()->back()->with($notification);
     }
 
-    public function CategoryActive($id){
+    public function CategoryActive($id)
+    {
         Category::findOrFail($id)->update(['status' => 1]);
-           $notification = array(
-              'message' => 'Category Active',
-              'alert-type' => 'success'
-          );
+        $notification = array(
+            'message' => 'Category Active',
+            'alert-type' => 'success'
+        );
 
-          return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification);
+    }
 
-       }
 
-
-    public function CategoryInactive($id){
+    public function CategoryInactive($id)
+    {
         Category::findOrFail($id)->update(['status' => 0]);
         $notification = array(
-           'message' => 'Category Inactive',
-           'alert-type' => 'success'
-       );
+            'message' => 'Category Inactive',
+            'alert-type' => 'success'
+        );
 
-       return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification);
     }
 }

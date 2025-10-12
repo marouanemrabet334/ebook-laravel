@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\AuthorController;
-
+use App\Http\Controllers\Admin\EbookFilesController;
 
 // Guest routes
 Route::middleware('guest')->group(function () {
@@ -34,7 +34,7 @@ Route::group([
     Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout'); // Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
     
     
-        Route::get('/category/view', [CategoryController::class, 'CategoryView'])->name('all.category');
+        Route::get('/category/view', [CategoryController::class, 'CategoryView'])->name('category.index');
         Route::post('/category/store', [CategoryController::class, 'CategoryStore'])->name('category.store');
         Route::get('/category/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
         Route::post('/category/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
@@ -44,7 +44,7 @@ Route::group([
 
         // Admin Sub Category All Routes
 
-        Route::get('/category/sub/view', [SubCategoryController::class, 'SubCategoryView'])->name('all.subcategory');
+        Route::get('/category/sub/view', [SubCategoryController::class, 'SubCategoryView'])->name('subcategory.index');
         Route::post('/category/sub/store', [SubCategoryController::class, 'SubCategoryStore'])->name('subcategory.store');
         Route::get('/category/sub/edit/{id}', [SubCategoryController::class, 'SubCategoryEdit'])->name('subcategory.edit');
         Route::post('/category/update', [SubCategoryController::class, 'SubCategoryUpdate'])->name('subcategory.update');
@@ -54,20 +54,22 @@ Route::group([
 
 
    
-        Route::get('/ebook/all', [EbookController::class, 'AllEbook'])->name('all.ebook');
-        Route::get('/ebook/add', [EbookController::class, 'AddEbook'])->name('add.ebook');
+        Route::get('/ebook/all', [EbookController::class, 'AllEbook'])->name('ebook.index');
+        Route::get('/ebook/create', [EbookController::class, 'CreateEbook'])->name('ebook.create');
         Route::post('/ebook/store', [EbookController::class, 'StoreEbook'])->name('ebook.store');
         Route::get('/ebook/edit/{id}', [EbookController::class, 'EditEbook'])->name('ebook.edit');
-        Route::post('/ebook/data/update', [EbookController::class, 'EbookDataUpdate'])->name('ebook.update');
-        Route::post('/ebook/thambnail/update', [EbookController::class, 'ThambnailImageUpdate'])->name('update.ebook.thambnail');
-        Route::post('/ebook/file/update', [EbookController::class, 'MultiFilesUpdate'])->name('update.ebook.file');
-        Route::get('/ebook/multifile/delete/{id}', [EbookController::class, 'MultiFileDelete'])->name('ebook.multifile.delete');
+        Route::post('/ebook/update', [EbookController::class, 'EbookDataUpdate'])->name('ebook.update');
+       // Route::post('/ebook/thambnail/update', [EbookController::class, 'ThambnailImageUpdate'])->name('update.ebook.thambnail');
+       
+       Route::post('/ebook/file/update', [EbookFilesController::class, 'store'])->name('update.ebook.file');
+        Route::get('/ebook/file/delete/{id}', [EbookFilesController::class, 'deleteFile'])->name('ebook.delete.file');
+        
         Route::get('/ebook/inactive/{id}', [EbookController::class, 'EbookInactive'])->name('ebook.inactive');
         Route::get('/ebook/active/{id}', [EbookController::class, 'EbookActive'])->name('ebook.active');
         Route::get('/ebook/delete/{id}', [EbookController::class, 'EbookDelete'])->name('ebook.delete');
     
 
-        Route::get('/author/all', [AuthorController::class, 'AllAuthor'])->name('all.author');
+        Route::get('/author/all', [AuthorController::class, 'AllAuthor'])->name('author.index');
         Route::post('/author/store', [AuthorController::class, 'AuthorStore'])->name('author.store');
         Route::get('/author/edit/{id}', [AuthorController::class, 'AuthorEdit'])->name('author.edit');
         Route::post('/author/update/{id}', [AuthorController::class, 'AuthorUpdate'])->name('author.update');
