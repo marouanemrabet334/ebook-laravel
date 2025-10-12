@@ -28,7 +28,7 @@ Route::group([
 
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index'); //admin.dashboard.index
 
-    Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
     // Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
 

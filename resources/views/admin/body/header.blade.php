@@ -33,10 +33,13 @@
                 <div class="dropdown-divider"></div>
 
                 <!-- item-->
-                <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item">
-                    <i class="fe-log-out"></i>
-                    <span>Logout</span>
-                </a>
+                <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="dropdown-item notify-item">
+                        <i class="fe-log-out"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
 
             </div>
         </li>
@@ -50,12 +53,12 @@
     <div class="logo-box">
         <a href="{{ route('admin.dashboard.index') }}" class="logo text-center">
             <span class="logo-lg">
-                <img src="{{ asset('public/admin/assets/images/logo-light.png') }}" alt="" height="16">
+                <img src="{{ asset('admin/assets/images/logo-light.png') }}" alt="" height="16">
                 <!-- <span class="logo-lg-text-light">UBold</span> -->
             </span>
             <span class="logo-sm">
                 <!-- <span class="logo-sm-text-dark">U</span> -->
-                <img src="{{ asset('public/admin/assets/images/logo-sm.png') }}" alt="" height="28">
+                <img src="{{ asset('admin/assets/images/logo-sm.png') }}" alt="" height="28">
             </span>
         </a>
     </div>
