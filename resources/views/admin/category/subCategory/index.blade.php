@@ -39,10 +39,10 @@
                                 <td>{{ $item->subcategory_name }}</td>
 
                                 <td width="30%">
-                                    <a href="{{ route('subcategory.edit', $item->id) }}"
+                                    <a href="{{ route('admin.subcategory.edit', $item->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-warning"> <i
                                             class="fas fa-pencil-alt"></i> </a>
-                                    <a href="{{ route('subcategory.delete', $item->id) }}"
+                                    <a href="{{ route('admin.subcategory.delete', $item->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-danger"><i
                                             class="fas fa-times"></i></a>
 
