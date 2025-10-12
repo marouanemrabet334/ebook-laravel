@@ -13,13 +13,13 @@ class CategoryController extends Controller
 {
     //
     use FileUploadTrait;
-    public function CategoryView()
+    public function index()
     {
         $categories = Category::latest()->get();
         return view('admin.category.index', compact('categories'));
     }
 
-    public function CategoryStore(Request $request)
+    public function store(Request $request)
     {
 
         $validateData = $request->validate([
@@ -50,12 +50,12 @@ class CategoryController extends Controller
         return redirect()->back()->with($notification);
     } //
 
-    public function CategoryEdit($id)
+    public function edit($id)
     {
         $category = Category::findOrFail($id);
         return view('admin.category.edit', compact('category'));
     }
-    public function CategoryUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
 
@@ -78,7 +78,7 @@ class CategoryController extends Controller
 
 
 
-    public function CategoryDelete($id)
+    public function delete($id)
     {
 
         $category = Category::findOrFail($id);
@@ -94,7 +94,7 @@ class CategoryController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function CategoryActive($id)
+    public function active($id)
     {
         Category::findOrFail($id)->update(['status' => 1]);
         $notification = array(
@@ -106,7 +106,7 @@ class CategoryController extends Controller
     }
 
 
-    public function CategoryInactive($id)
+    public function inactive($id)
     {
         Category::findOrFail($id)->update(['status' => 0]);
         $notification = array(

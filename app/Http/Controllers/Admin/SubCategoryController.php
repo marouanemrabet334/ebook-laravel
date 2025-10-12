@@ -21,7 +21,7 @@ class SubCategoryController extends Controller
         return json_encode($subCat);
     }
 
-    public function SubCategoryView()
+    public function index()
     {
 
         $categories = Category::orderBy('category_name', 'ASC')->get();
@@ -30,7 +30,7 @@ class SubCategoryController extends Controller
     }
 
 
-    public function SubCategoryStore(Request $request)
+    public function store(Request $request)
     {
 
         $request->validate([
@@ -60,14 +60,14 @@ class SubCategoryController extends Controller
 
 
 
-    public function SubCategoryEdit($id)
+    public function edit($id)
     {
         $categories = Category::orderBy('category_name', 'ASC')->get();
         $subcategory = SubCategory::findOrFail($id);
         return view('admin.category.subCategory.edit', compact('subcategory', 'categories'));
     }
 
-    public function SubCategoryUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
 
         $subCategory = SubCategory::findOrFail($id);
@@ -92,7 +92,7 @@ class SubCategoryController extends Controller
 
 
 
-    public function SubCategoryDelete($id)
+    public function delete($id)
     {
 
         $subcategory = SubCategory::findOrFail($id);

@@ -34,21 +34,21 @@ Route::group([
     Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout'); // Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
     
     
-        Route::get('/category/view', [CategoryController::class, 'CategoryView'])->name('category.index');
-        Route::post('/category/store', [CategoryController::class, 'CategoryStore'])->name('category.store');
-        Route::get('/category/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
-        Route::post('/category/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
-        Route::get('/category/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
-        Route::get('/category/active/{id}', [CategoryController::class, 'CategoryActive'])->name('category.active');
-        Route::get('/category/inactive/{id}', [CategoryController::class, 'CategoryInactive'])->name('category.inactive');
+        Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+        Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+        Route::get('/category/active/{id}', [CategoryController::class, 'active'])->name('category.active');
+        Route::get('/category/inactive/{id}', [CategoryController::class, 'inactive'])->name('category.inactive');
 
         // Admin Sub Category All Routes
 
-        Route::get('/category/sub/view', [SubCategoryController::class, 'SubCategoryView'])->name('subcategory.index');
-        Route::post('/category/sub/store', [SubCategoryController::class, 'SubCategoryStore'])->name('subcategory.store');
-        Route::get('/category/sub/edit/{id}', [SubCategoryController::class, 'SubCategoryEdit'])->name('subcategory.edit');
-        Route::post('/category/update', [SubCategoryController::class, 'SubCategoryUpdate'])->name('subcategory.update');
-        Route::get('/category/sub/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('subcategory.delete');
+        Route::get('/category/sub', [SubCategoryController::class, 'index'])->name('subcategory.index');
+        Route::post('/category/sub/store', [SubCategoryController::class, 'store'])->name('subcategory.store');
+        Route::get('/category/sub/edit/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
+        Route::post('/category/update', [SubCategoryController::class, 'update'])->name('subcategory.update');
+        Route::get('/category/sub/delete/{id}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
         Route::get('/category/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
   
         Route::get('/ebook/all', [EbookController::class, 'index'])->name('ebook.index');
