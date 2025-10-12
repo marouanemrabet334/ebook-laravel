@@ -19,8 +19,5 @@ class SubCategory extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
-    protected static function newFactory()
-    {
-        return SubCategoryFactory::new();
-    }
+    
 }
