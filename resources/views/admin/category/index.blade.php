@@ -41,7 +41,7 @@
 
                                 <td>{{ $category->category_name }}</td>
 
-                                <td> <img src="{{ asset($category->category_image) }}" style="width: 70px;height:40px;"
+                                <td> <img src="{{ asset('uploads'.$category->category_image) }}" style="width: 70px;height:40px;"
                                         alt="" srcset=""></td>
 
                                 <td><i class="{{ $category->category_icon }}"></i></td>
@@ -60,21 +60,21 @@
 
                                 <td width="35%">
 
-                                    <a href="{{ route('category.edit', $category->id) }}"
+                                    <a href="{{ route('admin.category.edit', $category->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-warning"> <i
                                             class="fas fa-pencil-alt"></i> </a>
-                                    <a href="{{ route('category.delete', $category->id) }}"
+                                    <a href="{{ route('admin.category.delete', $category->id) }}"
                                         class="btn btn-icon waves-effect waves-light btn-danger"><i
                                             class="fas fa-times"></i></a>
 
 
 
                                     @if ($category->status == 1)
-                                        <a href="{{ route('category.inactive', $category->id) }}"
+                                        <a href="{{ route('admin.category.inactive', $category->id) }}"
                                             class="btn btn-icon waves-effect waves-light btn-success"><i
                                                 class="far fa-thumbs-up"></i></a>
                                     @else
-                                        <a href="{{ route('category.active', $category->id) }}"
+                                        <a href="{{ route('admin.category.active', $category->id) }}"
                                             class="btn btn-icon waves-effect waves-light btn-danger"><i
                                                 class="far fa-thumbs-down"></i></a>
                                     @endif
