@@ -1,4 +1,10 @@
 # Laravel E-Book Project – All Artisan & Tinker Commands Used  
+
+php artisan serve --host=192.168.1.6 --port=8080
+
+# run seeders
+php artisan db:seed
+
 > Controllers, Models, Migrations, Seeders, Factories, Policies, etc.
 
 --------------------------------------------------
@@ -17,24 +23,37 @@ php artisan migrate:fresh --force
 --------------------------------------------------
 3. Models & Migrations
 --------------------------------------------------
-php artisan make:model Book -m
+php artisan make:model Ebook -m
+php artisan make:model EbookFile -m
 php artisan make:model Author -m
 php artisan make:model Category -m
-php artisan make:model Review -m
-php artisan make:model User --no-interaction   # already exists
+php artisan make:model SubCategory -m
+php artisan make:model AdsSetting -m
+
 
 --------------------------------------------------
 4. Controllers (API + Web)
 --------------------------------------------------
-php artisan make:controller BookController --api
-php artisan make:controller AuthorController --api
-php artisan make:controller CategoryController --api
-php artisan make:controller ReviewController --api
+php artisan make:controller Admin/EbookController
+php artisan make:controller Admin/EbookFilesController
+php artisan make:controller Admin/AuthorController 
+php artisan make:controller Admin/CategoryController
+php artisan make:controller Admin/SubCategoryController
+php artisan make:controller Admin/AdsSettingController
+php artisan make:controller Admin/AdminAuthController
+php artisan make:controller Admin/AdminDashboardController
+php artisan make:controller Admin/AdminProfileController
 
-php artisan make:controller Web/BookController
-php artisan make:controller Web/AuthorController
-php artisan make:controller Web/CategoryController
-php artisan make:controller Web/ReviewController
+php artisan make:controller Frontend/FrontendController
+
+php artisan make:controller User/UserAuthController
+
+php artisan make:controller Api/CategoryApiController
+php artisan make:controller Api/EbookApiController
+php artisan make:controller Api/SliderApiController
+php artisan make:controller Api/SubCategoryApiController
+php artisan make:controller Api/AuthorApiController
+php artisan make:controller Api/AdApiController
 
 --------------------------------------------------
 5. Requests & Resources
@@ -61,8 +80,7 @@ php artisan make:factory AuthorFactory
 php artisan make:factory CategoryFactory
 php artisan make:factory ReviewFactory
 
-# run seeders
-php artisan db:seed
+
 
 --------------------------------------------------
 7. Policies

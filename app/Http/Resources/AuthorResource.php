@@ -21,7 +21,7 @@ class AuthorResource extends JsonResource
                 'id' => $this->id,
                 'author_name' => $this->author_name,
                 'about_author' => $this->about_author,
-                'author_image' => asset($this->author_image) ?? '',
+                'author_image' => asset('uploads'.$this->author_image) ?? '',
                 'created_at' => $this->created_at->format('Y-D-m'),
             ];
         }

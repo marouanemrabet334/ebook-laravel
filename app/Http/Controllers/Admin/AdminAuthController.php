@@ -10,19 +10,18 @@ use Illuminate\Support\Facades\Request;
 class AdminAuthController extends Controller
 {
     //
-
-
-
-    public function index(){
+    public function index()
+    {
         return view('admin.auth.login');
     }
 
 
-    public function loginForm(){
+    public function loginForm()
+    {
         return view('admin.auth.login');
     }
 
- public function login(AuthRequest $request)
+    public function login(AuthRequest $request)
     {
         if ($request->validated()) {
             $credentials = $request->only('email', 'password');
@@ -32,7 +31,7 @@ class AdminAuthController extends Controller
                 $request->session()->regenerate();
 
                 // Track device
-                
+
                 // Redirect based on user type
                 if (Auth::user()->user_type === 'admin') {
 
@@ -55,7 +54,7 @@ class AdminAuthController extends Controller
 
         return redirect()->back()->with('msg', 'Login failed');
     }
-    
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -63,7 +62,4 @@ class AdminAuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/admin/login');
     }
-
-
-
 }

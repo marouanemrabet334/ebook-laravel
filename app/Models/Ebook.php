@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
 
-class Ebook extends Model  
+class Ebook extends Model
 {
     use HasFactory;
-    
+
 
     protected $guarded = [];
 
@@ -19,7 +19,7 @@ class Ebook extends Model
     ];
 
     public function pdf(){
-    	return $this->hasMany( EbookFile::class,'id','ebook_id');
+    	return $this->hasMany( EbookFile::class,'ebook_id','id');
     }
 
     public function author(){

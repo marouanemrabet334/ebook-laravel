@@ -1,90 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Abstack - Responsive Bootstrap 4 Admin Dashboard</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico')}}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-        <!-- App css -->
-        <link href="{{ asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('admin/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    </head>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <body class="authentication-bg bg-gradient">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-            <div class="pt-5 mt-5 mb-5 account-pages">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 col-lg-6 col-xl-5">
-                            <div class="card bg-pattern">
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-                                <div class="p-4 card-body">
+<body class="text-gray-900">
+    <div class="flex flex-col items-center pt-6 min-h-screen bg-gray-200 sm:justify-center sm:pt-0">
+        <div>
+            <a href="/">
+                <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
+            </a>
+        </div>
 
-                                    <div class="m-auto text-center w-75">
-                                        <a href="index.html">
-                                            <span><img src="{{ asset('admin/assets/images/logo-dark.png')}}" alt="" height="18"></span>
-                                        </a>
-                                        <h5 class="mt-4 font-bold text-center text-uppercase">Sign In</h5>
-
-                                    </div>
+        <div class="overflow-hidden px-6 py-4 mt-6 w-full bg-white shadow-md sm:max-w-md sm:rounded-lg">
+            <!-- Session Status -->
+            <x-auth-session-status class="mb-4" :status="session('status')" />
 
 
-                                    <form method="POST" action="{{ route('admin.login') }}">
-                                        @csrf
-
-                                        <div class="mb-3 form-group">
-                                            <label for="emailaddress">Email address</label>
-                                            <input class="form-control" type="email" id="email" name="email" required=""
-                                             placeholder="Enter your email">
-                                        </div>
-
-                                        <div class="mb-3 form-group">
-                                            <a href="pages-recoverpw.html" class="float-right text-muted"><small>Forgot your password?</small></a>
-
-                                            <label for="password">Password</label>
-                                            <input class="form-control" id="password" type="password" name="password"
-                                             required="" placeholder="Enter your password">
-                                        </div>
-
-
-                                        <div class="mb-0 text-center form-group">
-                                            <button class="btn btn-gradient btn-block" type="submit"
-                                             > Log In </button>
-                                        </div>
-
-                                    </form>
-
-
-
-
-                                </div> <!-- end card-body -->
-                            </div>
-                            <!-- end card -->
-
-
-
-                        </div> <!-- end col -->
-                    </div>
-                    <!-- end row -->
-                </div>
-                <!-- end container -->
+             <div class="mb-6 text-center">
+                <h1 class="text-2xl font-bold text-gray-800">Admin Login</h1>
+                <p class="text-gray-600">Sign in to admin panel</p>
             </div>
-            <!-- end page -->
+
+            <form method="POST" action="{{ route('admin.login.store') }}">
+                @csrf
+
+                <!-- Email -->
+
+                <x-form-input id="email" type="email" name="email" label="Email" placeholder="Email"
+                    :messages="$errors->get('email')" />
+
+                <x-form-input id="password" type="password" name="password" label="Password" placeholder="Password"
+                    required :messages="$errors->get('password')" />
 
 
-        <!-- Vendor js -->
-        <script src="{{ asset('admin/assets/js/vendor.min.js')}}"></script>
+                <div class="flex justify-between items-center mb-4">
 
-        <!-- App js -->
-        <script src="{{ asset('admin/assets/js/app.min.js')}}"></script>
+                    <x-form-checkbox name="remember_me" id="remember_me" label="Remember me" :checked="old('remember_me')" />
 
-    </body>
+                    @if (Route::has('password.request'))
+                        <a class="text-sm text-blue-600 hover:text-blue-800" href="{{ route('password.request') }}">
+                            {{ __('Forgot password?') }}
+                        </a>
+                    @endif
+                </div>
+
+
+
+
+                <x-form-button id="sign-in-btn" type="submit" size='sm' width='w-[100%]'>
+                    Sign In
+                </x-form-button>
+
+                <div class="mt-5 text-center">
+                    <p class="text-sm text-gray-600">
+                        Don't have an account?
+                        <a href="{{ route('admin.register.index') }}" class="font-medium text-blue-600 hover:text-blue-800">
+                            Sign up
+                        </a>
+                    </p>
+                </div>
+
+            </form>
+        </div>
+        <div class="mt-6 text-sm text-center text-gray-500">
+            &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+        </div>
+    </div>
+</body>
+
 </html>
+
 

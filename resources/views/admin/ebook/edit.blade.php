@@ -19,7 +19,7 @@
             <div class="card-box">
                 <h4 class="header-title">Add Add</h4>
 
-                <form method="post" action="{{ route('ebook.update') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.ebook.update') }}" enctype="multipart/form-data">
                     @csrf
 
                     <input type="hidden" name="id" value="{{ $books->id }}">
@@ -81,7 +81,7 @@
 
                             <div class="form-group">
 
-                                <h5>Ebook Name Arabic <span class="text-danger">*</span></h5>
+                                <h5>Ebook Name <span class="text-danger">*</span></h5>
                                 <div class="controls">
                                     <input type="text" name="ebook_name" class="form-control" required=""
                                         value="{{ $books->ebook_name }}">
@@ -183,7 +183,7 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <h5>Short Description Arabic <span class="text-danger">*</span></h5>
+                                <h5>Short Description <span class="text-danger">*</span></h5>
                                 <div class="controls">
                                     <textarea name="short_desc" id="textarea" class="form-control" placeholder="Textarea text" style="height: 390px;"> {!! $books->short_desc !!}</textarea>
                                 </div>
@@ -195,13 +195,10 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <h5>Long Description Arabic <span class="text-danger">*</span></h5>
+                                <h5>Long Description <span class="text-danger">*</span></h5>
                                 <div class="controls">
 
-                                    {{-- <textarea name="long_desc" id="my_summernote" style="height: 300px;"
-                                    class="form-control" rows="4">
-                                    {!! $books->long_desc !!}
-                                </textarea> --}}
+
 
                                     <textarea id="summernote" name="long_desc" style="height: 300px;">
                                     {!! $books->long_desc !!}
@@ -332,14 +329,14 @@
 
                     @foreach ($ebookFiles as $file)
                         <div class="col-md-6">
-                            <form method="post" action="{{ route('update.ebook.file') }}"
+                            <form method="post" action=""
                                 enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="card">
                                     <br>
                                     <small style="margin: 5%">
-                                        <a href="{{ asset($file->file_name) }}">{{ asset($file->file_name) }}</a>
+                                        <a href="{{ asset('uploads'.$file->file_name) }}">{{ asset($file->file_name) }}</a>
                                     </small>
 
                                     <div class="card-body">
@@ -359,7 +356,7 @@
                                         <input type="submit" class="btn btn-rounded btn-primary mb-1"
                                             value="Update File">
 
-                                        <a href="{{ route('ebook.delete.file', $file->id) }}"
+                                        <a href="{{ route('admin.ebook.delete.file', $file->id) }}"
                                             class="btn btn-danger btn-rounded waves-light waves-effect width-md">
                                             Delete File
                                         </a>
@@ -394,7 +391,11 @@
 
 
     </div>
-    <script type="text/javascript">
+
+@endsection
+
+@push('scripts')
+<script type="text/javascript">
         $(document).ready(function() {
             $('select[name="category_id"]').on('change', function() {
                 var category_id = $(this).val();
@@ -466,4 +467,4 @@
             });
         });
     </script>
-@endsection
+@endpush

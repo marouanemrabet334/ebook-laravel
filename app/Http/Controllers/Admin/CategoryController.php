@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Traits\FileUploadTrait;
@@ -29,7 +29,7 @@ class CategoryController extends Controller
             'category_icon' => 'required',
         ], [
 
-            'category_name.required' => 'Input Category Arabic  Name',
+            'category_name.required' => 'Input Category   Name',
             'category_icon.required' => 'Input Category Icon',
 
         ]);

@@ -10,16 +10,8 @@ use Illuminate\Support\Facades\Request;
 class AdminDashboardController extends Controller
 {
     //
-
-
-
-    public function index(){
+    public function index()
+    {
         return view('admin.index');
     }
-
-
-
-
-
-
 }

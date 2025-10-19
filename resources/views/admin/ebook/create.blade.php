@@ -201,10 +201,6 @@
                                 <h5>Long Description <span class="text-danger">*</span></h5>
                                 <div class="controls">
 
-                                    {{-- <div id="content" name="long_desc" style="height: 300px;">
-
-                                    </div> <!-- end Snow-editor--> --}}
-
                                     <textarea id="summernote" name="long_desc" style="height: 300px;"></textarea>
 
                                 </div>
@@ -225,15 +221,15 @@
 
                                 <div class="controls">
                                     <fieldset>
-                                        <input type="checkbox" name="hot_deals" value="1">
+                                        <input type="checkbox" name="hot_deals">
                                         <label for="checkbox_2">Hot Deals</label>
                                     </fieldset>
                                     <fieldset>
-                                        <input type="checkbox" name="featured_slider" value="1">
+                                        <input type="checkbox" name="featured_slider" >
                                         <label for="checkbox_3">Featured Slide</label>
                                     </fieldset>
                                     <fieldset>
-                                        <input type="checkbox" id="checkbox_6" name="free" value="1">
+                                        <input type="checkbox" id="checkbox_6" name="free" >
                                         <label for="checkbox_6">Free</label>
                                     </fieldset>
                                 </div>
@@ -246,11 +242,11 @@
                             <div class="form-group">
                                 <div class="controls">
                                     <fieldset>
-                                        <input type="checkbox" name="special_offer" value="1">
+                                        <input type="checkbox" name="special_offer">
                                         <label for="checkbox_4">Special Offer</label>
                                     </fieldset>
                                     <fieldset>
-                                        <input type="checkbox" name="soon" value="1">
+                                        <input type="checkbox" name="soon">
                                         <label for="checkbox_5">Soon</label>
                                     </fieldset>
                                 </div>

@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdsSetting extends Model
+class Author extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
+
+    public function ship(){
+    	return $this->hasOne(Ebook::class,'author_id','id');
+    }
+
+
 }

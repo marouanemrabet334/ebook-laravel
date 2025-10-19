@@ -3,18 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\Admin\Author;
-use App\Models\Admin\Category;
-use App\Models\Admin\Ebook;
-use App\Models\Admin\EbookFile;
-use App\Models\Admin\SubCategory;
-use App\Models\FileUp;
+use App\Models\EbookFile;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Traits\FileUploadTrait;
-
+use Illuminate\Support\Facades\Storage;
 
 class EbookFilesController extends Controller
 {
@@ -23,51 +17,61 @@ class EbookFilesController extends Controller
 
 
 
-    /// Multiple Image Update
-    public function store(Request $request)
+    /// Multiple File Update
+    public function update(Request $request)
     {
         $validateData = $request->validate([
-            'pdf_from_local' => 'required',
-
+            'pdf_from_local' => 'required|array',
+            'pdf_from_local.*' => 'file|mimes:pdf|max:10240', // 10 MB max
         ], [
             'pdf_from_local.required' => 'المرجوا رفع ملف جديد لتغيير الملف القديم بالجديد',
-
-
         ]);
 
-        $files = $request->file('pdf_from_local');
+        foreach ($request->file('pdf_from_local') as $id => $file) {
+            $ebookFile = EbookFile::findOrFail($id);
 
-        foreach ($files as $id =>  $file) {
-            $fileDel = EbookFile::findOrFail($id);
-            unlink($fileDel->file_name);
-            $name = time() . rand(1, 100) . '.' . $file->extension();
-            $file->move(public_path('upload/files/'), $name);
-            $uploadPath = 'upload/files/' . $name;
-            EbookFile::where('id', $id)->update([
-                'file_name' => $uploadPath,
-                'created_at' => Carbon::now(),
+            // Delete old file
+            if ($ebookFile->file_path) {
+                Storage::disk('public_uploads')->delete($ebookFile->file_path);
+            }
 
+            // Store new file
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = 'ebooks/files/' . $request->user()->id . '/' . $fileName;
+
+            Storage::disk('public_uploads')->put(
+                $path,
+                file_get_contents($file)
+            );
+
+            // Update record
+            $ebookFile->update([
+                'file_path' => $path,
+                'file_name' => $fileName,
+                'file_size' => $file->getSize(),
+                'file_type' => $file->getClientMimeType(),
+                'file_extension' => $file->getClientOriginalExtension(),
+                'updated_at' => Carbon::now(),
             ]);
         }
 
-        // end foreach
-
-
-
         $notification = array(
-            'message' => 'Product Image Updated Successfully',
+            'message' => 'Ebook File Updated Successfully',
             'alert-type' => 'info'
         );
 
         return redirect()->back()->with($notification);
-    } // end mehtod
+    }
 
     //// Multi Image Delete ////
     public function deleteFile($id)
     {
         $oldfile = EbookFile::findOrFail($id);
-        unlink($oldfile->file_name);
-        EbookFile::findOrFail($id)->delete();
+
+        Storage::disk('public_uploads')->delete(
+            $oldfile->file_path);
+
+        $oldfile->delete();
 
         $notification = array(
             'message' => 'Ebook File Deleted Successfully',
@@ -77,5 +81,5 @@ class EbookFilesController extends Controller
         return redirect()->back()->with($notification);
     } // end method
 
-   
+
 }

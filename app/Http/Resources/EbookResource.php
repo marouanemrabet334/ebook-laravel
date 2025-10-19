@@ -19,7 +19,7 @@ class EbookResource extends JsonResource
             'category_id' => $this->category_id,
             'subcategory_id' => $this->subcategory_id,
             'ebook_name' => $this->ebook_name,
-            'ebook_img' => asset($this->ebook_img) ?? '',
+            'ebook_img' => asset('uploads'.$this->ebook_img) ?? '',
             'ebook_img_url' => $this->ebook_img_url ?? '',
             'author_id' => new AuthorResource($this->author),
             'pages' => $this->pages,

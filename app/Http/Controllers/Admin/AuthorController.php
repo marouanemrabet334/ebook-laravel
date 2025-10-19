@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Author;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Intervention\Image\Facades\Image;
 use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +29,7 @@ class AuthorController extends Controller
             'author_name' => 'required',
             'about_author' => 'required',
         ], [
-            'author_name.required' => 'Input Author Arabic Name',
+            'author_name.required' => 'Input Author  Name',
             'about_author.required' => 'Input About Author',
 
         ]);
@@ -80,7 +79,7 @@ class AuthorController extends Controller
             'alert-type' => 'info'
         );
 
-        return redirect()->route('author.index')->with($notification);
+        return redirect()->route('admin.author.index')->with($notification);
     } // End Method
 
 

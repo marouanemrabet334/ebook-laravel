@@ -1,6 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\IndexApiController;
+use App\Http\Controllers\Api\CategoryApiController;
+use App\Http\Controllers\Api\EbookApiController;
+use App\Http\Controllers\Api\SliderApiController;
+use App\Http\Controllers\Api\SubCategoryApiController;
+use App\Http\Controllers\Api\AuthorApiController;
+use App\Http\Controllers\Api\AdApiController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,10 +16,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {});
 
-Route::get('/categories', [IndexApiController::class, 'showCategories']);
-Route::get('/ebook', [IndexApiController::class, 'showEbook']);
-Route::get('/ebook/soon', [IndexApiController::class, 'showSoonEbook']);
-Route::get('/slider', [IndexApiController::class, 'showSlider']);
-Route::get('/sub/categories', [IndexApiController::class, 'showSubCategories']);
-Route::get('/authors', [IndexApiController::class, 'showAuthors']);
-Route::get('/ads', [IndexApiController::class, 'showAds']);
+Route::get('/categories', [CategoryApiController::class, 'showCategories']);
+Route::get('/ebook', [EbookApiController::class, 'showEbook']);
+Route::get('/ebook/soon', [EbookApiController::class, 'showSoonEbook']);
+Route::get('/slider', [SliderApiController::class, 'showSlider']);
+Route::get('/sub-categories', [SubCategoryApiController::class, 'showSubCategories']);
+Route::get('/authors', [AuthorApiController::class, 'showAuthors']);
+Route::get('/ads', [AdApiController::class, 'showAds']);

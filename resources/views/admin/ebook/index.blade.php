@@ -20,7 +20,7 @@
                     <thead>
                         <tr>
                             <th>Image </th>
-                            <th>Ebook Name Arabic </th>
+                            <th>Ebook Name </th>
                             <th>Status </th>
                             <th>Free Or Paid </th>
                             <th>Action</th>
@@ -34,9 +34,9 @@
 
                         @foreach ($books as $item)
                             <tr>
-                                <td> <img src="{{ asset('uploads'.$item->ebook_img) }}"
-                                    style="width: 60px; height: 50px;"> </td> 
-                              {{--   <td> <img src="{{ $item->getFirstMediaUrl('images') }}" style="width: 60px; height: 50px;">
+                                <td> <img src="{{ asset('uploads' . $item->ebook_img) }}" style="width: 60px; height: 50px;">
+                                </td>
+                                {{--   <td> <img src="{{ $item->getFirstMediaUrl('images') }}" style="width: 60px; height: 50px;">
                                 </td> --}}
                                 <td>{{ $item->ebook_name }}</td>
 

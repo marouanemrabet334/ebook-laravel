@@ -18,7 +18,7 @@ class SubCategoryResource extends JsonResource
             'id' => $this->id,
             'category_id' => $this->category_id,
             'subcategory_name' => $this->subcategory_name,
-            'subcategory_image' => asset($this->subcategory_image) ?? '',
+            'subcategory_image' => asset('uploads'.$this->subcategory_image) ?? '',
             'created_at' => $this->created_at->format('Y-D-m'),
 
         ];

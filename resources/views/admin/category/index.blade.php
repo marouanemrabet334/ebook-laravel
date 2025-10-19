@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
 
-                            <th>Category Name Ar</th>
+                            <th>Category Name</th>
                             <th>Category Image</th>
                             <th>Category Icon</th>
                             <th>Status</th>
@@ -102,7 +102,7 @@
                     <br>
                     <div class="form-group">
                         <label>Category Name<span class="text-danger"> *</span></label>
-                        <input type="text" name="category_name"required="" placeholder="Enter name" class="form-control">
+                        <input type="text" name="category_name" required="" placeholder="Enter name" class="form-control">
                         @error('category_name')
                             <span class="text-danger">
                                 <strong>{{ $message }}</strong>

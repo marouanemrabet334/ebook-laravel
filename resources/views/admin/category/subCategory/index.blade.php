@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
 
-                            <th>Category Arabic</th>
+                            <th>Category </th>
                             <th>SubCategory Image</th>
                             <th>SubCategory Name Ar</th>
                             <th>Action</th>
@@ -34,14 +34,17 @@
                         @foreach ($subcategory as $item)
                             <tr>
                                 <td>{{ $item->category->category_name }}</td>
-                                <td><img src="{{ asset('uploads'.$item->subcategory_image) }}" style="width: 70px;height:40px;" alt=""></td>
+                                <td><img src="{{ asset('uploads' . $item->subcategory_image) }}"
+                                        style="width: 70px;height:40px;" alt=""></td>
                                 <td>{{ $item->subcategory_name }}</td>
 
                                 <td width="30%">
-                                    <a href="{{ route('admin.subcategory.edit', $item->id) }}" class="btn btn-icon waves-effect waves-light btn-warning">
+                                    <a href="{{ route('admin.subcategory.edit', $item->id) }}"
+                                        class="btn btn-icon waves-effect waves-light btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a href="{{ route('admin.subcategory.delete', $item->id) }}" class="btn btn-icon waves-effect waves-light btn-danger">
+                                    <a href="{{ route('admin.subcategory.delete', $item->id) }}"
+                                        class="btn btn-icon waves-effect waves-light btn-danger">
                                         <i class="fas fa-times"></i>
                                     </a>
                                 </td>

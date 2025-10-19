@@ -42,11 +42,10 @@ Route::group([
     Route::get('/category/inactive/{id}', [CategoryController::class, 'inactive'])->name('category.inactive');
 
     // Admin Sub Category All Routes
-
-    Route::get('/category/sub', [SubCategoryController::class, 'index'])->name('subcategory.index');
-    Route::post('/category/sub/store', [SubCategoryController::class, 'store'])->name('subcategory.store');
-    Route::get('/category/sub/edit/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
-    Route::post('/category/update', [SubCategoryController::class, 'update'])->name('subcategory.update');
+    Route::get('/subcategory', [SubCategoryController::class, 'index'])->name('subcategory.index');
+    Route::post('/subcategory/store', [SubCategoryController::class, 'store'])->name('subcategory.store');
+    Route::get('/subcategory/edit/{id}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
+    Route::post('/subcategory/update/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
     Route::get('/category/sub/delete/{id}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
     Route::get('/category/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
 
@@ -57,8 +56,9 @@ Route::group([
     Route::post('/ebook/update', [EbookController::class, 'update'])->name('ebook.update');
     // Route::post('/ebook/thambnail/update', [EbookController::class, 'ThambnailImageUpdate'])->name('update.ebook.thambnail');
 
-    Route::post('/ebook/file/update', [EbookFilesController::class, 'store'])->name('update.ebook.file');
+    Route::post('/ebook/file/update/{id}', [EbookFilesController::class, 'update'])->name('update.ebook.file');
     Route::get('/ebook/file/delete/{id}', [EbookFilesController::class, 'deleteFile'])->name('ebook.delete.file');
+
     Route::get('/ebook/inactive/{id}', [EbookController::class, 'inactive'])->name('ebook.inactive');
     Route::get('/ebook/active/{id}', [EbookController::class, 'active'])->name('ebook.active');
     Route::get('/ebook/delete/{id}', [EbookController::class, 'destroy'])->name('ebook.delete');

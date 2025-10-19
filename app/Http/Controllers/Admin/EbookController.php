@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Admin\Author;
-use App\Models\Admin\Category;
-use App\Models\Admin\Ebook;
-use App\Models\Admin\EbookFile;
-use App\Models\Admin\SubCategory;
-use App\Models\FileUp;
+use App\Models\Author;
+use App\Models\Category;
+use App\Models\Ebook;
+use App\Models\EbookFile;
+use App\Models\SubCategory;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Termwind\Components\Dd;
 
 class EbookController extends Controller
 {
@@ -25,10 +26,9 @@ class EbookController extends Controller
 
     public function index()
     {
-
-
-        $books = Ebook::with(['pdf', 'author'])
-            ->where('status', true)
+        $books = Ebook::
+            latest()
+            ->with(['author', 'pdf'])
             ->get();
 
         return view('admin.ebook.index', compact('books'));
@@ -45,58 +45,65 @@ class EbookController extends Controller
 
     public function store(Request $request)
     {
+        try {
+            $imgName = $this->uploadFile($request, 'ebook_img', null, '/ebooks/images');
 
-        $imgName = $this->uploadFile($request, 'ebook_img', null, '/ebooks');
+            $ebook = new Ebook();
+            $ebook->category_id = $request->category_id;
+            $ebook->subcategory_id = $request->subcategory_id;
+            $ebook->author_id = $request->author_id;
+            $ebook->user_id = Auth::user()->id;
+            $ebook->ebook_name =  $request->ebook_name;
+            $ebook->ebook_img = $imgName;
+            $ebook->ebook_img_url = $request->ebook_img_url;
+            $ebook->pages = $request->pages;
+            $ebook->lang_ebook   = $request->lang_ebook;
+            $ebook->short_desc = $request->short_desc;
+            $ebook->long_desc = $request->long_desc;
+            $ebook->pdf_from_url = $request->pdf_from_url;
+            $ebook->hot_deals = $request->hot_deals ? 1 : 0;
+            $ebook->featured_slider = $request->featured_slider ? 1 : 0;
+            $ebook->special_offer = $request->special_offer ? 1 : 0;
+            $ebook->soon = $request->soon ? 1 : 0;
+            $ebook->status = 1;
+            $ebook->free = $request->free ? 1 : 0;
+            $ebook->rating = 0;
+            $ebook->created_at = Carbon::now();
+            $ebook->save();
 
-        $ebook = new Ebook();
-        $ebook->category_id = $request->category_id;
-        $ebook->subcategory_id = $request->subcategory_id;
-        $ebook->author_id = $request->author_id;
-        $ebook->user_id = Auth::user()->id;           
-        $ebook->ebook_name = $request->ebook_name;
-        $ebook->ebook_img = $imgName;
-        $ebook->ebook_img_url = $request->ebook_img_url;     
-        $ebook->pages = $request->pages;
-        $ebook->lang_ebook   = $request->lang_ebook;
-        $ebook->short_desc = $request->short_desc;
-        $ebook->long_desc = $request->long_desc;
-        $ebook->pdf_from_url = $request->pdf_from_url;
-        $ebook->hot_deals = $request->hot_deals;
-        $ebook->featured_slider = $request->featured_slider;
-        $ebook->special_offer = $request->special_offer;
-        $ebook->soon = $request->soon;
-        $ebook->status = 1;
-        $ebook->free = $request->free;
-        $ebook->rating = 0;
-        $ebook->created_at = Carbon::now();
-        $ebook->save();
+            foreach ($request->file('pdf_from_local') as $file) {
 
-        foreach ($request->file('pdf_from_local') as $file) {
+                $fileName = Str::random(30);
+                $path = '/ebooks/files/' . $request->user()->id . '/' . $fileName;
+                Storage::disk('public_uploads')->put(
+                    $path,
+                    file_get_contents($file)
+                );
 
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $path = 'ebooks/files/' . $request->user()->id . '/' . $fileName;
-
-            Storage::disk('public_uploads')->put(
-                $path,
-                file_get_contents($file)
+                $ebookFile = new EbookFile();
+                $ebookFile->ebook_id        = $ebook->id;
+                $ebookFile->file_path       = $path;
+                $ebookFile->file_name       = $file->getClientOriginalName();
+                $ebookFile->file_size       = $file->getSize();
+                $ebookFile->file_type       = $file->getMimeType();
+                $ebookFile->file_extension  = $file->getClientOriginalExtension();
+                $ebookFile->created_at      = Carbon::now();
+                $ebookFile->save();
+            }
+            $notification = array(
+                'message' => 'Ebook Inserted Successfully',
+                'alert-type' => 'success'
             );
 
-            $ebookFile = new EbookFile();
-            $ebookFile->ebook_id        = $ebook->id;
-            $ebookFile->file_path       = $path;
-            $ebookFile->file_name       = $file->getClientOriginalName();
-            $ebookFile->file_size       = $file->getSize();
-            $ebookFile->file_type       = $file->getMimeType();
-            $ebookFile->file_extension  = $file->getClientOriginalExtension();
-            $ebookFile->created_at      = Carbon::now();
-            $ebookFile->save();
-        }
-        $notification = array(
-            'message' => 'Ebook Inserted Successfully',
-            'alert-type' => 'success'
-        );
+            return redirect()->route('admin.ebook.index')->with($notification);
+        } catch (\Exception $e) {
+            $notification = array(
+                'message' => 'Failed to insert ebook: ' . $e->getMessage(),
+                'alert-type' => 'error'
+            );
 
-        return redirect()->route('ebook.index')->with($notification);
+            return redirect()->back()->with($notification);
+        }
     } // end method
 
     public function edit($id)
@@ -113,7 +120,7 @@ class EbookController extends Controller
         return view('admin.ebook.edit', compact('categories', 'subcategory', 'books', 'ebookFiles', 'authors'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,Ebook $id)
     {
 
         $ebook =  Ebook::findOrFail($id);
@@ -131,11 +138,11 @@ class EbookController extends Controller
             'short_desc' => $request->short_desc,
             'long_desc' => $request->long_desc,
             'pdf_from_url' => $request->pdf_from_url,
-            'hot_deals' => $request->hot_deals,
-            'featured_slider' => $request->featured_slider,
-            'special_offer' => $request->special_offer,
-            'soon' => $request->soon,
-            'free' => $request->free,
+            'hot_deals' => $request->hot_deals ? 1 : 0,
+            'featured_slider' => $request->featured_slider ? 1 : 0,
+            'special_offer' => $request->special_offer ? 1 : 0,
+            'soon' => $request->soon ? 1 : 0,
+            'free' => $request->free ? 1 : 0,
             'updated_at' => Carbon::now(),
 
         ]);
@@ -145,7 +152,7 @@ class EbookController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('ebook.index')->with($notification);
+        return redirect()->route('admin.ebook.index')->with($notification);
     }
 
 
